@@ -2,7 +2,7 @@ class Node:
     def __init__(self, parent=None, name='', filesize=0) -> None:
         self.parent = parent
         self.childs = {}
-        self.name = name
+        # self.name = name
         self.size = filesize
         
     def __repr__(self) -> str:
@@ -32,7 +32,6 @@ def walk_tree_task2(root: Node, space_need):
         
 current_node = root = Node()
 
-commands = []        
 with open('day 07\input.txt') as f:
     lines = f.read().split('\n')
     for line in lines[1:]:
@@ -54,12 +53,10 @@ walk_tree_task1(root,0)
 total = 0
 for node in found_nodes:
     total += node.size
-print('Task 1 folder ', total)
+print('Task 1 answer:', total)
+
+#Task 2
 space_need = 30000000-(70000000-root.size)
-print('need_space', space_need)
 if space_need>0:
     walk_tree_task2(root, space_need)
-    b = sorted(found_nodes2, key=lambda item: item.size)
-    print('Delete node', b[0].size)
-#print(root.size)
-# list(map(print, found_nodes))
+    print('Task 2 answer:', min(found_nodes2, key=lambda item: item.size).size)
